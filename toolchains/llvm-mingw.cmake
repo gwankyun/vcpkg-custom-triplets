@@ -1,13 +1,18 @@
+# 加載配置文件
 cmake_path(SET config_path "${CMAKE_CURRENT_LIST_DIR}")
 cmake_path(GET config_path PARENT_PATH config_path)
 cmake_path(APPEND config_path "config.cmake")
+
 if(NOT EXISTS "${config_path}")
   message(FATAL_ERROR "config.cmake does not exist: ${config_path}")
 endif()
+
 include("${config_path}")
 
+# 先加載vcpkg的mingw工具鏈
 include("${vcpkg_path}/scripts/toolchains/mingw.cmake")
 
+# 覆蓋vcpkg的mingw工具鏈
 set(CMAKE_C_COMPILER "${llvm_mingw_clang}")
 set(CMAKE_CXX_COMPILER "${llvm_mingw_clangxx}")
 

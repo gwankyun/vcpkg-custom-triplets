@@ -1,3 +1,4 @@
+# 加載配置文件
 cmake_path(SET config_path "${CMAKE_CURRENT_LIST_DIR}")
 cmake_path(APPEND config_path "config.cmake")
 
@@ -7,12 +8,14 @@ endif()
 
 include("${config_path}")
 
+# 加載vcpkg自帶的x64-mingw-static三元組
 if(NOT DEFINED x64_mingw_triplet)
   set(x64_mingw_triplet "x64-mingw-static.cmake")
 endif()
 
 include("${vcpkg_path}/triplets/community/${x64_mingw_triplet}")
 
+# 設置工具鏈文件路徑
 set(toolchains_file_path "${CMAKE_CURRENT_LIST_DIR}/toolchains/llvm-mingw.cmake")
 message(STATUS "toolchains_file_path: ${toolchains_file_path}")
 
