@@ -1,6 +1,11 @@
 # 加載配置文件
-cmake_path(SET config_path "${CMAKE_CURRENT_LIST_DIR}")
-cmake_path(APPEND config_path "config.cmake")
+if(DEFINED ENV{VCPKG_CUSTOM_TRIPLETS})
+  set(config_path "$ENV{VCPKG_CUSTOM_TRIPLETS}/config.cmake")
+else()
+  cmake_path(SET config_path "${CMAKE_CURRENT_LIST_DIR}")
+  cmake_path(GET config_path PARENT_PATH config_path)
+  cmake_path(APPEND config_path "config.cmake")
+endif()
 
 if(NOT EXISTS "${config_path}")
   message(FATAL_ERROR "config.cmake does not exist: ${config_path}")
