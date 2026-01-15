@@ -1,10 +1,8 @@
 # 加載配置文件
 if(DEFINED ENV{VCPKG_CUSTOM_TRIPLETS})
-  set(config_path "$ENV{VCPKG_CUSTOM_TRIPLETS}/config.cmake")
+  set(config_path "$ENV{VCPKG_CUSTOM_TRIPLETS}/toolchains/config.cmake")
 else()
-  cmake_path(SET config_path "${CMAKE_CURRENT_LIST_DIR}")
-  cmake_path(GET config_path PARENT_PATH config_path)
-  cmake_path(APPEND config_path "config.cmake")
+  set(config_path "${CMAKE_CURRENT_LIST_DIR}/toolchains/config.cmake")
 endif()
 
 if(NOT EXISTS "${config_path}")

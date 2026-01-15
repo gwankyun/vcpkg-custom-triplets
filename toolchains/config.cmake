@@ -6,9 +6,9 @@ else()
 endif()
 
 # 配置llvm-ming編譯器路徑
-if(DEFINED ENV{LLVM_MINGW_BIN})
-  set(llvm_mingw_clang "$ENV{LLVM_MINGW_BIN}/clang.exe")
-  set(llvm_mingw_clangxx "$ENV{LLVM_MINGW_BIN}/clang++.exe")
+if(DEFINED ENV{LLVM_MINGW_ROOT})
+  set(llvm_mingw_clang "$ENV{LLVM_MINGW_ROOT}/bin/clang.exe")
+  set(llvm_mingw_clangxx "$ENV{LLVM_MINGW_ROOT}/bin/clang++.exe")
 else()
   set(llvm_mingw_clang "C:/local/llvm-mingw/bin/clang.exe")
   set(llvm_mingw_clangxx "C:/local/llvm-mingw/bin/clang++.exe")
