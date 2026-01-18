@@ -1,9 +1,5 @@
 # 加載配置文件
-if(DEFINED ENV{VCPKG_CUSTOM_TRIPLETS})
-  set(config_path "$ENV{VCPKG_CUSTOM_TRIPLETS}/toolchains/config.cmake")
-else()
-  set(config_path "${CMAKE_CURRENT_LIST_DIR}/config.cmake")
-endif()
+set(config_path "${CMAKE_CURRENT_LIST_DIR}/config.cmake")
 
 if(NOT EXISTS "${config_path}")
   message(FATAL_ERROR "config.cmake does not exist: ${config_path}")
@@ -12,7 +8,9 @@ endif()
 include("${config_path}")
 
 # 先加載vcpkg的mingw工具鏈
-include("${vcpkg_path}/scripts/toolchains/mingw.cmake")
+set(mingw_path "${vcpkg_path}/scripts/toolchains/mingw.cmake")
+check_file("${mingw_path}")
+include("${mingw_path}")
 
 # 覆蓋vcpkg的mingw工具鏈
 set(CMAKE_C_COMPILER "${llvm_mingw_clang}")
