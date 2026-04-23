@@ -1,15 +1,16 @@
-# 加載配置文件
-set(config_path "${CMAKE_CURRENT_LIST_DIR}/config.cmake")
+set(custom_triplets_path "${CMAKE_CURRENT_LIST_DIR}")
 
-if(NOT EXISTS "${config_path}")
-  message(FATAL_ERROR "config.cmake does not exist: ${config_path}")
+if(NOT EXISTS "${custom_triplets_path}/detail/config.cmake")
+  set(custom_triplets_path "C:/local/vcpkg-custom-triplets")
 endif()
+
+# 加載配置文件
+set(config_path "${custom_triplets_path}/config.cmake")
 
 include("${config_path}")
 
 # 先加載vcpkg的mingw工具鏈
 set(mingw_path "${vcpkg_path}/scripts/toolchains/mingw.cmake")
-check_file("${mingw_path}")
 include("${mingw_path}")
 
 # 覆蓋vcpkg的mingw工具鏈

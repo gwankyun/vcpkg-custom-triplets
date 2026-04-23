@@ -1,9 +1,11 @@
-# 加載配置文件
-set(config_path "${CMAKE_CURRENT_LIST_DIR}/detail/config.cmake")
+set(custom_triplets_path "${CMAKE_CURRENT_LIST_DIR}")
 
-if(NOT EXISTS "${config_path}")
-  message(FATAL_ERROR "config_path does not exist: ${config_path}")
+if(NOT EXISTS "${custom_triplets_path}/detail/config.cmake")
+  set(custom_triplets_path "C:/local/vcpkg-custom-triplets")
 endif()
+
+# 加載配置文件
+set(config_path "${custom_triplets_path}/detail/config.cmake")
 
 include("${config_path}")
 
@@ -13,10 +15,8 @@ if(NOT DEFINED x64_mingw_triplet)
 endif()
 
 set(x64_mingw_triplet "${vcpkg_path}/triplets/community/${x64_mingw_triplet}")
-check_file("${x64_mingw_triplet}")
 include(${x64_mingw_triplet})
 
 # 設置工具鏈文件路徑
-set(toolchains_file_path "${CMAKE_CURRENT_LIST_DIR}/detail/llvm-mingw.cmake")
-check_file(${toolchains_file_path})
+set(toolchains_file_path "${custom_triplets_path}/detail/llvm-mingw.cmake")
 set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${toolchains_file_path}")
