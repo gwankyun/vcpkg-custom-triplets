@@ -5,7 +5,7 @@ if(NOT EXISTS "${custom_triplets_path}/detail/config.cmake")
 endif()
 
 # 加載配置文件
-set(config_path "${custom_triplets_path}/config.cmake")
+set(config_path "${custom_triplets_path}/detail/config.cmake")
 
 include("${config_path}")
 
