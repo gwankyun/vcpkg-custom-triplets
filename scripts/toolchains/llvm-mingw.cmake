@@ -1,4 +1,4 @@
-include("${CMAKE_CURRENT_LIST_DIR}/../../scripts/toolchains/mingw.cmake")
+include("$ENV{CUSTOM_VCPKG_ROOT_DIR}/scripts/toolchains/mingw.cmake")
 
 if("$ENV{LLVM_MINGW_ROOT}" STREQUAL "")
     message(FATAL_ERROR "LLVM_MINGW_ROOT is not set")
