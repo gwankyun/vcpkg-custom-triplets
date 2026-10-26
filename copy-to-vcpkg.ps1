@@ -8,7 +8,18 @@ if (-not $VcpkgRoot) {
     throw 'VCPKG_ROOT is not set.'
 }
 
-Copy-Item -Path "$PSScriptRoot\triplets\*.cmake" -Destination "$VcpkgRoot\triplets\community\" -Force
-Copy-Item -Path "$PSScriptRoot\toolchains\llvm-mingw.cmake" -Destination "$VcpkgRoot\scripts\toolchains\" -Force
+$copyTriplets = @{
+    Path        = "$PSScriptRoot\triplets\community\*.cmake"
+    Destination = "$VcpkgRoot\triplets\community\"
+    Force       = $true
+}
+Copy-Item @copyTriplets
+
+$copyToolchains = @{
+    Path        = "$PSScriptRoot\scripts\toolchains\*.cmake"
+    Destination = "$VcpkgRoot\scripts\toolchains\"
+    Force       = $true
+}
+Copy-Item @copyToolchains
 
 Write-Host "synced to $VcpkgRoot"
